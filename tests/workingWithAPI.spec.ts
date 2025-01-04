@@ -1,20 +1,15 @@
-import { test, expect, request } from "@playwright/test";
-import tags from "../test-data/tags.json";
-import exp from "constants";
+import { test, expect, request } from '@playwright/test';
+import tags from '../test-data/tags.json';
 
 test.beforeEach(async ({ page }) => {
   await page.route("*/**/api/tags", async route => {
     await route.fulfill({
       body: JSON.stringify(tags),
-    });
-  });
+    })
+  })
 
   await page.goto("http://conduit.bondaracademy.com/");
-  await page.getByText('Sign in').click()
-  await page.getByRole('textbox', {name: "Email"}).fill("kaukau@gmail.com")
-  await page.getByRole('textbox', {name: "Password"}).fill("kaukau123")
-  await page.getByRole('button').click()
-});
+})
 
 
 test("has title", async ({ page }) => {
